@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mangalore Awaits — Discover the Coastal Pearl</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FBF7F0;
+    --sand: #E8DFD0;
+    --terracotta: #C4522A;
+    --terracotta-dark: #8C3518;
+    --terracotta-light: #F0C4A8;
+    --ocean: #1A5276;
+    --ocean-mid: #2E86C1;
+    --ocean-light: #AED6F1;
+    --gold: #B7860B;
+    --gold-light: #F9E79F;
+    --deep: #1C1410;
+    --text-muted: #6B5E52;
+    --white: #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--deep); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(28, 20, 16, 0.92);
+    backdrop-filter: blur(12px);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; color: var(--cream); font-size: 1.4rem; letter-spacing: 0.02em; }
+  .nav-logo span { color: var(--terracotta-light); font-style: italic; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: rgba(251,247,240,0.75); text-decoration: none; font-size: 0.9rem; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--terracotta-light); }
+  .nav-cta { background: var(--terracotta); color: var(--white); padding: 0.55rem 1.4rem; border-radius: 2px; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; transition: background 0.2s; }
+  .nav-cta:hover { background: var(--terracotta-dark); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #1C1410 0%, #2E1A0E 40%, #1A3A52 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    padding: 8rem 3rem 4rem;
+    text-align: center;
+  }
+  .hero-pattern {
+    position: absolute; inset: 0; opacity: 0.06;
+    background-image: repeating-linear-gradient(45deg, var(--terracotta-light) 0, var(--terracotta-light) 1px, transparent 0, transparent 50%);
+    background-size: 24px 24px;
+  }
+  .hero-accent {
+    position: absolute; top: 20%; right: 8%;
+    width: 320px; height: 320px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,82,42,0.18) 0%, transparent 70%);
+    animation: pulse-glow 5s ease-in-out infinite alternate;
+  }
+  .hero-accent2 {
+    position: absolute; bottom: 15%; left: 5%;
+    width: 240px; height: 240px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,82,118,0.25) 0%, transparent 70%);
+    animation: pulse-glow 7s ease-in-out infinite alternate-reverse;
+  }
+  @keyframes pulse-glow { from { transform: scale(1); } to { transform: scale(1.15); } }
+
+  .hero-content { position: relative; z-index: 2; max-width: 800px; }
+  .hero-badge {
+    display: inline-block; margin-bottom: 1.5rem;
+    background: rgba(196,82,42,0.2); border: 1px solid rgba(240,196,168,0.35);
+    color: var(--terracotta-light); padding: 0.4rem 1.2rem;
+    border-radius: 20px; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 7vw, 5.2rem);
+    color: var(--cream); line-height: 1.12; font-weight: 700;
+    animation: fadeUp 0.9s 0.1s ease both;
+    margin-bottom: 0.4rem;
+  }
+  .hero h1 em { color: var(--terracotta-light); font-style: italic; }
+  .hero-sub {
+    font-size: 1.15rem; color: rgba(251,247,240,0.6); font-weight: 300;
+    line-height: 1.7; margin-bottom: 2.5rem;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+  .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeUp 1s 0.3s ease both; }
+  .btn-primary {
+    background: var(--terracotta); color: var(--white); padding: 0.9rem 2.2rem;
+    border-radius: 2px; font-size: 0.95rem; font-weight: 600;
+    letter-spacing: 0.04em; text-decoration: none; transition: all 0.25s;
+    border: 2px solid var(--terracotta);
+  }
+  .btn-primary:hover { background: var(--terracotta-dark); border-color: var(--terracotta-dark); transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent; color: var(--cream); padding: 0.9rem 2.2rem;
+    border-radius: 2px; font-size: 0.95rem; font-weight: 500;
+    letter-spacing: 0.04em; text-decoration: none; transition: all 0.25s;
+    border: 1.5px solid rgba(251,247,240,0.35);
+  }
+  .btn-ghost:hover { border-color: rgba(251,247,240,0.75); background: rgba(251,247,240,0.08); }
+
+  .hero-stats {
+    margin-top: 4rem; display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp 1s 0.4s ease both;
+  }
+  .stat { text-align: center; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--cream); font-weight: 700; }
+  .stat-label { font-size: 0.78rem; color: rgba(251,247,240,0.5); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.2rem; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SEARCH BAR */
+  .search-section {
+    background: var(--deep); padding: 2rem 3rem;
+    display: flex; justify-content: center; align-items: center; gap: 0;
+  }
+  .search-bar {
+    background: var(--white); display: flex; border-radius: 3px;
+    overflow: hidden; max-width: 860px; width: 100%;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.25);
+  }
+  .search-field {
+    flex: 1; display: flex; flex-direction: column;
+    padding: 1rem 1.4rem; border-right: 1px solid var(--sand);
+    cursor: pointer; transition: background 0.2s;
+  }
+  .search-field:hover { background: #FAFAFA; }
+  .search-field label { font-size: 0.7rem; font-weight: 600; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.2rem; }
+  .search-field input, .search-field select {
+    border: none; outline: none; font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem; color: var(--deep); background: transparent; cursor: pointer;
+  }
+  .search-field select option { font-size: 0.95rem; }
+  .search-btn {
+    background: var(--terracotta); color: var(--white);
+    border: none; padding: 1rem 2rem; font-size: 1rem; font-weight: 600;
+    cursor: pointer; transition: background 0.2s; letter-spacing: 0.05em;
+  }
+  .search-btn:hover { background: var(--terracotta-dark); }
+
+  /* SECTIONS */
+  section { padding: 5rem 3rem; }
+  .section-label {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--terracotta); margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700; line-height: 1.2; margin-bottom: 1rem; color: var(--deep);
+  }
+  .section-title em { color: var(--terracotta); font-style: italic; }
+  .section-intro { font-size: 1.05rem; color: var(--text-muted); line-height: 1.75; max-width: 580px; }
+  .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem; }
+  .see-all { color: var(--terracotta); font-size: 0.88rem; font-weight: 600; text-decoration: none; letter-spacing: 0.04em; border-bottom: 1px solid var(--terracotta-light); padding-bottom: 2px; }
+
+  /* ATTRACTIONS */
+  .attractions { background: var(--cream); }
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .place-card {
+    background: var(--white); border-radius: 4px; overflow: hidden;
+    border: 1px solid var(--sand); transition: all 0.3s; cursor: pointer;
+  }
+  .place-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(28,20,16,0.12); border-color: var(--terracotta-light); }
+  .card-img {
+    height: 200px; position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center; font-size: 3.5rem;
+  }
+  .card-img-beach { background: linear-gradient(135deg, #1A5276 0%, #2E86C1 50%, #85C1E9 100%); }
+  .card-img-temple { background: linear-gradient(135deg, #784212 0%, #B7770D 50%, #F0B27A 100%); }
+  .card-img-food { background: linear-gradient(135deg, #922B21 0%, #C0392B 50%, #F1948A 100%); }
+  .card-img-nature { background: linear-gradient(135deg, #1E8449 0%, #27AE60 50%, #82E0AA 100%); }
+  .card-img-market { background: linear-gradient(135deg, #6C3483 0%, #8E44AD 50%, #C39BD3 100%); }
+  .card-img-port { background: linear-gradient(135deg, #1A5276 0%, #117A65 50%, #76D7C4 100%); }
+  .card-badge {
+    position: absolute; top: 1rem; left: 1rem;
+    background: rgba(28,20,16,0.65); color: var(--cream);
+    padding: 0.25rem 0.7rem; border-radius: 20px; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em;
+  }
+  .card-body { padding: 1.3rem; }
+  .card-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .card-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem; }
+  .card-meta { display: flex; align-items: center; justify-content: space-between; }
+  .rating { display: flex; align-items: center; gap: 0.3rem; font-size: 0.85rem; font-weight: 600; color: var(--gold); }
+  .card-link { font-size: 0.82rem; font-weight: 600; color: var(--terracotta); letter-spacing: 0.04em; text-decoration: none; }
+
+  /* SERVICES */
+  .services { background: var(--deep); }
+  .services .section-label { color: var(--terracotta-light); }
+  .services .section-title { color: var(--cream); }
+  .services .section-intro { color: rgba(251,247,240,0.6); }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+  .service-card {
+    background: rgba(251,247,240,0.05); border: 1px solid rgba(251,247,240,0.1);
+    border-radius: 4px; padding: 2rem 1.5rem; text-align: center;
+    cursor: pointer; transition: all 0.3s;
+  }
+  .service-card:hover {
+    background: rgba(196,82,42,0.15); border-color: rgba(240,196,168,0.3);
+    transform: translateY(-4px);
+  }
+  .service-icon { font-size: 2.2rem; margin-bottom: 1rem; display: block; }
+  .service-name { font-size: 1rem; font-weight: 600; color: var(--cream); margin-bottom: 0.4rem; }
+  .service-desc { font-size: 0.82rem; color: rgba(251,247,240,0.5); line-height: 1.6; }
+
+  /* EXPERIENCES */
+  .experiences { background: #F4EDE0; }
+  .exp-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.5rem; }
+  .exp-feature {
+    background: var(--white); border-radius: 4px; padding: 3rem;
+    border: 1px solid var(--sand); position: relative; overflow: hidden;
+  }
+  .exp-feature::before {
+    content: ''; position: absolute; top: -40px; right: -40px;
+    width: 180px; height: 180px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,82,42,0.08) 0%, transparent 70%);
+  }
+  .exp-emoji { font-size: 3rem; margin-bottom: 1.5rem; display: block; }
+  .exp-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; margin-bottom: 0.7rem; }
+  .exp-desc { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem; }
+  .exp-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .exp-tag {
+    background: var(--terracotta-light); color: var(--terracotta-dark);
+    padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 500;
+  }
+  .exp-side { display: flex; flex-direction: column; gap: 1.5rem; }
+  .exp-mini {
+    background: var(--white); border-radius: 4px; padding: 1.5rem;
+    border: 1px solid var(--sand); display: flex; gap: 1rem; align-items: flex-start;
+    cursor: pointer; transition: all 0.25s;
+  }
+  .exp-mini:hover { border-color: var(--terracotta-light); box-shadow: 0 8px 25px rgba(28,20,16,0.08); }
+  .exp-mini-icon { font-size: 1.8rem; flex-shrink: 0; }
+  .exp-mini-title { font-weight: 600; font-size: 1rem; margin-bottom: 0.3rem; }
+  .exp-mini-desc { font-size: 0.83rem; color: var(--text-muted); line-height: 1.5; }
+
+  /* FOOD */
+  .food-section { background: var(--cream); }
+  .food-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; }
+  .food-card {
+    border: 1px solid var(--sand); border-radius: 4px; overflow: hidden;
+    background: var(--white); cursor: pointer; transition: all 0.3s;
+  }
+  .food-card:hover { transform: translateY(-4px); box-shadow: 0 12px 35px rgba(28,20,16,0.1); }
+  .food-header { padding: 1.8rem; text-align: center; font-size: 2.8rem; }
+  .food-bg-1 { background: linear-gradient(135deg, #FEF9E7 0%, #FDEBD0 100%); }
+  .food-bg-2 { background: linear-gradient(135deg, #FDF2F8 0%, #F9E4D8 100%); }
+  .food-bg-3 { background: linear-gradient(135deg, #E8F8F5 0%, #D5F5E3 100%); }
+  .food-bg-4 { background: linear-gradient(135deg, #EAF2FB 0%, #D6EAF8 100%); }
+  .food-bg-5 { background: linear-gradient(135deg, #F4F6F7 0%, #EAECEE 100%); }
+  .food-body { padding: 1rem 1.3rem 1.3rem; }
+  .food-name { font-weight: 700; font-size: 1rem; margin-bottom: 0.3rem; }
+  .food-note { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+
+  /* ITINERARY */
+  .itinerary { background: var(--ocean); }
+  .itinerary .section-label { color: var(--ocean-light); }
+  .itinerary .section-title { color: var(--white); }
+  .itinerary .section-intro { color: rgba(255,255,255,0.65); }
+  .itin-tabs { display: flex; gap: 0.5rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+  .itin-tab {
+    padding: 0.55rem 1.4rem; border-radius: 2px; font-size: 0.88rem; font-weight: 600;
+    border: 1.5px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.6);
+    cursor: pointer; transition: all 0.2s; background: transparent;
+  }
+  .itin-tab.active { background: var(--white); color: var(--ocean); border-color: var(--white); }
+  .itin-tab:hover:not(.active) { border-color: rgba(255,255,255,0.55); color: rgba(255,255,255,0.9); }
+  .itin-days { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+  .itin-day {
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 4px; padding: 1.5rem;
+  }
+  .day-num { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ocean-light); margin-bottom: 0.4rem; }
+  .day-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--white); font-weight: 700; margin-bottom: 1rem; }
+  .day-stops { list-style: none; }
+  .day-stops li { display: flex; gap: 0.7rem; align-items: flex-start; font-size: 0.85rem; color: rgba(255,255,255,0.7); padding: 0.4rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .day-stops li:last-child { border-bottom: none; }
+  .stop-dot { width: 6px; height: 6px; background: var(--ocean-light); border-radius: 50%; flex-shrink: 0; margin-top: 0.4rem; }
+
+  /* PRACTICAL */
+  .practical { background: #F4EDE0; }
+  .prac-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+  .prac-card { background: var(--white); border: 1px solid var(--sand); border-radius: 4px; padding: 1.8rem; }
+  .prac-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+  .prac-title { font-weight: 700; font-size: 1rem; margin-bottom: 0.8rem; color: var(--deep); }
+  .prac-list { list-style: none; }
+  .prac-list li { font-size: 0.88rem; color: var(--text-muted); padding: 0.35rem 0; border-bottom: 1px solid var(--sand); display: flex; justify-content: space-between; }
+  .prac-list li:last-child { border-bottom: none; }
+  .prac-val { font-weight: 600; color: var(--deep); }
+
+  /* NEWSLETTER */
+  .newsletter {
+    background: var(--deep); padding: 4rem 3rem;
+    text-align: center;
+  }
+  .newsletter h2 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--cream); margin-bottom: 0.8rem; }
+  .newsletter p { font-size: 1rem; color: rgba(251,247,240,0.6); margin-bottom: 2rem; }
+  .nl-form { display: flex; gap: 0; max-width: 480px; margin: 0 auto; }
+  .nl-form input {
+    flex: 1; padding: 0.9rem 1.2rem; border: 1px solid rgba(251,247,240,0.2);
+    border-right: none; background: rgba(251,247,240,0.08); color: var(--cream);
+    font-family: 'DM Sans', sans-serif; font-size: 0.95rem; outline: none; border-radius: 2px 0 0 2px;
+  }
+  .nl-form input::placeholder { color: rgba(251,247,240,0.4); }
+  .nl-form button {
+    background: var(--terracotta); color: var(--white); padding: 0.9rem 1.8rem;
+    border: none; font-size: 0.9rem; font-weight: 600; cursor: pointer;
+    border-radius: 0 2px 2px 0; transition: background 0.2s;
+  }
+  .nl-form button:hover { background: var(--terracotta-dark); }
+
+  /* FOOTER */
+  footer {
+    background: #100D0A; padding: 3rem 3rem 2rem;
+    border-top: 1px solid rgba(251,247,240,0.06);
+  }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem; }
+  .footer-brand .nav-logo { display: block; margin-bottom: 0.8rem; font-size: 1.3rem; }
+  .footer-tagline { font-size: 0.88rem; color: rgba(251,247,240,0.4); line-height: 1.65; }
+  .footer-col h4 { font-size: 0.75rem; font-weight: 600; color: rgba(251,247,240,0.5); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1rem; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { padding: 0.28rem 0; }
+  .footer-col a { font-size: 0.88rem; color: rgba(251,247,240,0.55); text-decoration: none; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--terracotta-light); }
+  .footer-bottom { border-top: 1px solid rgba(251,247,240,0.08); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-copy { font-size: 0.82rem; color: rgba(251,247,240,0.3); }
+  .footer-social { display: flex; gap: 1rem; }
+  .social-btn {
+    width: 36px; height: 36px; border-radius: 2px;
+    border: 1px solid rgba(251,247,240,0.15); background: transparent;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(251,247,240,0.5); font-size: 0.85rem; text-decoration: none;
+    transition: all 0.2s; font-weight: 600;
+  }
+  .social-btn:hover { background: var(--terracotta); border-color: var(--terracotta); color: var(--white); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 3.5rem 1.5rem; }
+    .exp-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    .hero-stats { gap: 1.5rem; }
+    .search-section { padding: 1.5rem; }
+    .search-bar { flex-direction: column; }
+    .search-field { border-right: none; border-bottom: 1px solid var(--sand); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Mangalore<span>Awaits</span></div>
+  <ul class="nav-links">
+    <li><a href="#attractions">Explore</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#food">Food</a></li>
+    <li><a href="#itinerary">Itineraries</a></li>
+    <li><a href="#practical">Plan Trip</a></li>
+  </ul>
+  <a href="#" class="nav-cta">Book Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-pattern"></div>
+  <div class="hero-accent"></div>
+  <div class="hero-accent2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ Karnataka's Coastal Gem</div>
+    <h1>Discover <em>Mangalore</em>,<br>Where Sea Meets Soul</h1>
+    <p class="hero-sub">Ancient temples, golden beaches, legendary seafood &amp; the warmth of Tulu Nadu — your journey to India's most authentic coastal city begins here.</p>
+    <div class="hero-actions">
+      <a href="#attractions" class="btn-primary">Explore the City</a>
+      <a href="#itinerary" class="btn-ghost">View Itineraries</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Attractions</div></div>
+      <div class="stat"><div class="stat-num">50+</div><div class="stat-label">Beaches</div></div>
+      <div class="stat"><div class="stat-num">200+</div><div class="stat-label">Restaurants</div></div>
+      <div class="stat"><div class="stat-num">12+</div><div class="stat-label">Festivals</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SEARCH -->
+<div class="search-section">
+  <div class="search-bar">
+    <div class="search-field">
+      <label>I want to</label>
+      <select>
+        <option>Explore Attractions</option>
+        <option>Book a Hotel</option>
+        <option>Arrange Transport</option>
+        <option>Join a Food Tour</option>
+        <option>Plan Day Trip</option>
+      </select>
+    </div>
+    <div class="search-field">
+      <label>Duration</label>
+      <select>
+        <option>1 Day</option>
+        <option>2–3 Days</option>
+        <option>4–5 Days</option>
+        <option>A Week+</option>
+      </select>
+    </div>
+    <div class="search-field">
+      <label>Travel Style</label>
+      <select>
+        <option>Cultural Explorer</option>
+        <option>Beach Lover</option>
+        <option>Food Enthusiast</option>
+        <option>Adventure Seeker</option>
+        <option>Family Vacation</option>
+      </select>
+    </div>
+    <button class="search-btn">Plan My Trip →</button>
+  </div>
+</div>
+
+<!-- ATTRACTIONS -->
+<section class="attractions" id="attractions">
+  <div class="section-header">
+    <div>
+      <div class="section-label">✦ Top Destinations</div>
+      <h2 class="section-title">Mangalore's <em>Icons</em></h2>
+      <p class="section-intro">From sacred temples to sun-kissed shores — places that will stay with you long after you leave.</p>
+    </div>
+    <a href="#" class="see-all">View All Attractions →</a>
+  </div>
+  <div class="cards-grid">
+    <div class="place-card">
+      <div class="card-img card-img-beach">🏖️<div class="card-badge">Beach</div></div>
+      <div class="card-body">
+        <div class="card-title">Panambur Beach</div>
+        <div class="card-desc">Mangalore's beloved coastline, famous for its golden sands, water sports, and the spectacular annual Kite Festival.</div>
+        <div class="card-meta"><span class="rating">★ 4.7 <span style="font-weight:400;color:#888">(2.1k)</span></span><a href="#" class="card-link">Explore →</a></div>
+      </div>
+    </div>
+    <div class="place-card">
+      <div class="card-img card-img-temple">🛕<div class="card-badge">Temple</div></div>
+      <div class="card-body">
+        <div class="card-title">Mangaladevi Temple</div>
+        <div class="card-desc">The 10th-century Dravida-style temple from which the city draws its name, dedicated to Goddess Mangaladevi.</div>
+        <div class="card-meta"><span class="rating">★ 4.9 <span style="font-weight:400;color:#888">(3.4k)</span></span><a href="#" class="card-link">Explore →</a></div>
+      </div>
+    </div>
+    <div class="place-card">
+      <div class="card-img card-img-nature">🌿<div class="card-badge">Nature</div></div>
+      <div class="card-body">
+        <div class="card-title">Kadri Manjunatha Temple</div>
+        <div class="card-desc">Set amid wooded hills, this ancient temple hosts the oldest bronze Lokeshwara statue in Karnataka — a 1,000-year masterpiece.</div>
+        <div class="card-meta"><span class="rating">★ 4.8 <span style="font-weight:400;color:#888">(1.8k)</span></span><a href="#" class="card-link">Explore →</a></div>
+      </div>
+    </div>
+    <div class="place-card">
+      <div class="card-img card-img-beach" style="background: linear-gradient(135deg, #0D4F5C 0%, #1A7A8A 50%, #5BB8CC 100%);">🚢<div class="card-badge">Heritage</div></div>
+      <div class="card-body">
+        <div class="card-title">Tannirbhavi Beach</div>
+        <div class="card-desc">Accessible only by ferry across the Gurupura river, this secluded beach offers unspoilt views and a magical sunset experience.</div>
+        <div class="card-meta"><span class="rating">★ 4.6 <span style="font-weight:400;color:#888">(980)</span></span><a href="#" class="card-link">Explore →</a></div>
+      </div>
+    </div>
+    <div class="place-card">
+      <div class="card-img card-img-market">🎪<div class="card-badge">Culture</div></div>
+      <div class="card-body">
+        <div class="card-title">Sultan Battery</div>
+        <div class="card-desc">A lone watchtower built by Tipu Sultan overlooking the Gurupura estuary — a quiet sentinel of Mangalore's layered history.</div>
+        <div class="card-meta"><span class="rating">★ 4.4 <span style="font-weight:400;color:#888">(760)</span></span><a href="#" class="card-link">Explore →</a></div>
+      </div>
+    </div>
+    <div class="place-card">
+      <div class="card-img card-img-port">⛵<div class="card-badge">Scenic</div></div>
+      <div class="card-body">
+        <div class="card-title">St. Aloysius Chapel</div>
+        <div class="card-desc">A breathtaking 1880 chapel with ceiling and wall frescoes painted by Italian Jesuit brother Antonio Moscheni — Mangalore's Sistine Chapel.</div>
+        <div class="card-meta"><span class="rating">★ 4.9 <span style="font-weight:400;color:#888">(2.7k)</span></span><a href="#" class="card-link">Explore →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header">
+    <div>
+      <div class="section-label">✦ What We Offer</div>
+      <h2 class="section-title" style="color:var(--cream)">All Your Travel <em style="color:var(--terracotta-light)">Needs</em></h2>
+      <p class="section-intro">We make exploring Mangalore effortless. From the moment you land to the moment you leave.</p>
+    </div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-icon">🏨</span>
+      <div class="service-name">Hotel Booking</div>
+      <div class="service-desc">Curated stays from heritage guesthouses to beachfront resorts</div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🚕</span>
+      <div class="service-name">Airport Transfers</div>
+      <div class="service-desc">Reliable taxi & cab services from Mangalore Airport</div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🗺️</span>
+      <div class="service-name">Guided Tours</div>
+      <div class="service-desc">Expert local guides for temples, history & food walks</div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🚢</span>
+      <div class="service-name">Ferry & Boat Rides</div>
+      <div class="service-desc">River crossings and backwater cruises on the Netravathi</div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🍽️</span>
+      <div class="service-name">Food Tours</div>
+      <div class="service-desc">Tasting trails through bunts eateries, fish markets & cafés</div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🏄</span>
+      <div class="service-name">Water Sports</div>
+      <div class="service-desc">Surfing, jet skiing, parasailing at Panambur & Sasihithlu</div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🌄</span>
+      <div class="service-name">Day Excursions</div>
+      <div class="service-desc">Trips to Dharmasthala, Horanadu, Murudeshwara & Coorg</div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">📸</span>
+      <div class="service-name">Photography Tours</div>
+      <div class="service-desc">Sunrise shoots at beaches, temples & the old port area</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCES -->
+<section class="experiences" id="experiences">
+  <div class="section-header">
+    <div>
+      <div class="section-label">✦ Only in Mangalore</div>
+      <h2 class="section-title">Signature <em>Experiences</em></h2>
+      <p class="section-intro">These are not just tourist activities — they are living traditions that define Mangalore's soul.</p>
+    </div>
+  </div>
+  <div class="exp-grid">
+    <div class="exp-feature">
+      <span class="exp-emoji">🥁</span>
+      <div class="exp-title">Yakshagana — The Living Epic</div>
+      <div class="exp-desc">Witness the ancient all-night theatrical tradition of coastal Karnataka performed under the open sky. Elaborate costumes, percussion, song and story — Yakshagana is like nothing else on earth.</div>
+      <div class="exp-tags">
+        <span class="exp-tag">3–8 hrs</span>
+        <span class="exp-tag">Oct – May</span>
+        <span class="exp-tag">Cultural</span>
+        <span class="exp-tag">Village Venues</span>
+      </div>
+    </div>
+    <div class="exp-side">
+      <div class="exp-mini">
+        <div class="exp-mini-icon">🎏</div>
+        <div>
+          <div class="exp-mini-title">Kambala — Buffalo Races</div>
+          <div class="exp-mini-desc">The thrilling traditional buffalo race on slush tracks — Mangalore's answer to NASCAR, held in village paddy fields Nov–March.</div>
+        </div>
+      </div>
+      <div class="exp-mini">
+        <div class="exp-mini-icon">🦞</div>
+        <div>
+          <div class="exp-mini-title">Fish Market at Dawn</div>
+          <div class="exp-mini-desc">The 5AM Hoige Bazaar wholesale fish market is a riot of color, noise and fresh catch — one of India's most cinematic sights.</div>
+        </div>
+      </div>
+      <div class="exp-mini">
+        <div class="exp-mini-icon">🛶</div>
+        <div>
+          <div class="exp-mini-title">Backwater Village Cruise</div>
+          <div class="exp-mini-desc">A slow boat through coconut-lined backwaters of the Gurupura and Netravathi rivers as the sun dips low.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOD -->
+<section class="food-section" id="food">
+  <div class="section-header">
+    <div>
+      <div class="section-label">✦ Eat Like a Mangalorean</div>
+      <h2 class="section-title">Food That <em>Defines</em> a City</h2>
+      <p class="section-intro">Mangalorean cuisine is one of India's most celebrated — rich coconut-based curries, unmatched seafood and legendary street snacks.</p>
+    </div>
+    <a href="#" class="see-all">Food Guide →</a>
+  </div>
+  <div class="food-grid">
+    <div class="food-card">
+      <div class="food-header food-bg-1">🦀</div>
+      <div class="food-body">
+        <div class="food-name">Mangalorean Fish Curry</div>
+        <div class="food-note">Kori rotti, neer dosa or rice — the coconut-tamarind curry is the city's soul in a bowl.</div>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-header food-bg-2">🍗</div>
+      <div class="food-body">
+        <div class="food-name">Chicken Ghee Roast</div>
+        <div class="food-note">A Kundapur original — fiery red masala, ghee and a slow roast that has conquered the world.</div>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-header food-bg-3">🥞</div>
+      <div class="food-body">
+        <div class="food-name">Neer Dosa</div>
+        <div class="food-note">Paper-thin rice crepes, delicate as lace — the perfect companion to any Mangalorean side dish.</div>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-header food-bg-4">🥟</div>
+      <div class="food-body">
+        <div class="food-name">Goli Baje</div>
+        <div class="food-note">Fluffy maida fritters with a hint of sourness — the quintessential Mangalore tea-time snack since forever.</div>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-header food-bg-5">🍵</div>
+      <div class="food-body">
+        <div class="food-name">Filter Coffee + Buns</div>
+        <div class="food-note">The famous Udupi-style toddy shop buns with filter kaapi — a breakfast ritual that cannot be skipped.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ITINERARY -->
+<section class="itinerary" id="itinerary">
+  <div class="section-header">
+    <div>
+      <div class="section-label">✦ Ready-Made Plans</div>
+      <h2 class="section-title" style="color:var(--white)">Curated <em style="color:var(--ocean-light)">Itineraries</em></h2>
+      <p class="section-intro">Pick a pace. We've mapped out the perfect Mangalore trip for every kind of traveller.</p>
+    </div>
+  </div>
+  <div class="itin-tabs">
+    <button class="itin-tab active">Weekend (2 Days)</button>
+    <button class="itin-tab" onclick="this.parentElement.querySelectorAll('.itin-tab').forEach(t=>t.classList.remove('active')); this.classList.add('active')">Long Weekend (3 Days)</button>
+    <button class="itin-tab" onclick="this.parentElement.querySelectorAll('.itin-tab').forEach(t=>t.classList.remove('active')); this.classList.add('active')">Full Week</button>
+    <button class="itin-tab" onclick="this.parentElement.querySelectorAll('.itin-tab').forEach(t=>t.classList.remove('active')); this.classList.add('active')">With Kids</button>
+  </div>
+  <div class="itin-days">
+    <div class="itin-day">
+      <div class="day-num">Day 1 — Morning</div>
+      <div class="day-title">Sacred Mangalore</div>
+      <ul class="day-stops">
+        <li><div class="stop-dot"></div>Mangaladevi Temple at sunrise</li>
+        <li><div class="stop-dot"></div>Kadri Manjunatha Temple</li>
+        <li><div class="stop-dot"></div>Goli Baje breakfast at Ideal Cafe</li>
+        <li><div class="stop-dot"></div>St. Aloysius Chapel</li>
+      </ul>
+    </div>
+    <div class="itin-day">
+      <div class="day-num">Day 1 — Afternoon</div>
+      <div class="day-title">Beaches & Bites</div>
+      <ul class="day-stops">
+        <li><div class="stop-dot"></div>Old Port & Sultan Battery</li>
+        <li><div class="stop-dot"></div>Seafood lunch at Shetty's</li>
+        <li><div class="stop-dot"></div>Panambur Beach</li>
+        <li><div class="stop-dot"></div>Sunset at Tannirbhavi (ferry)</li>
+      </ul>
+    </div>
+    <div class="itin-day">
+      <div class="day-num">Day 2 — Morning</div>
+      <div class="day-title">Beyond the City</div>
+      <ul class="day-stops">
+        <li><div class="stop-dot"></div>Early drive to Dharmasthala</li>
+        <li><div class="stop-dot"></div>Shravanabelagola detour</li>
+        <li><div class="stop-dot"></div>Traditional Annadana lunch</li>
+        <li><div class="stop-dot"></div>Kukke Subramanya</li>
+      </ul>
+    </div>
+    <div class="itin-day">
+      <div class="day-num">Day 2 — Evening</div>
+      <div class="day-title">Culture Night</div>
+      <ul class="day-stops">
+        <li><div class="stop-dot"></div>Lalbagh evening stroll</li>
+        <li><div class="stop-dot"></div>Chicken Ghee Roast dinner</li>
+        <li><div class="stop-dot"></div>Yakshagana performance (Oct–May)</li>
+        <li><div class="stop-dot"></div>Filter coffee nightcap</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PRACTICAL -->
+<section class="practical" id="practical">
+  <div class="section-header">
+    <div>
+      <div class="section-label">✦ Visitor Essentials</div>
+      <h2 class="section-title">Plan Your <em>Visit</em></h2>
+      <p class="section-intro">Everything you need to know before you arrive in Mangalore.</p>
+    </div>
+  </div>
+  <div class="prac-grid">
+    <div class="prac-card">
+      <span class="prac-icon">✈️</span>
+      <div class="prac-title">Getting Here</div>
+      <ul class="prac-list">
+        <li>Mangalore Airport (IXE)<span class="prac-val">12 km city</span></li>
+        <li>Train — Mangaluru Central<span class="prac-val">City centre</span></li>
+        <li>Bus — KSRTC Terminal<span class="prac-val">Bejai</span></li>
+        <li>Road — NH-66 Mumbai–Kochi<span class="prac-val">Highway</span></li>
+      </ul>
+    </div>
+    <div class="prac-card">
+      <span class="prac-icon">🌤️</span>
+      <div class="prac-title">Best Time to Visit</div>
+      <ul class="prac-list">
+        <li>Oct – Feb (Peak)<span class="prac-val">★★★★★</span></li>
+        <li>Mar – May (Warm)<span class="prac-val">★★★☆☆</span></li>
+        <li>Jun – Sep (Monsoon)<span class="prac-val">★★☆☆☆</span></li>
+        <li>Yakshagana Season<span class="prac-val">Oct – May</span></li>
+      </ul>
+    </div>
+    <div class="prac-card">
+      <span class="prac-icon">🚗</span>
+      <div class="prac-title">Getting Around</div>
+      <ul class="prac-list">
+        <li>Auto Rickshaw<span class="prac-val">₹30 base</span></li>
+        <li>City Bus (KSRTC)<span class="prac-val">₹10–₹25</span></li>
+        <li>Cab (Ola/Uber)<span class="prac-val">Available</span></li>
+        <li>Ferry (Tannirbhavi)<span class="prac-val">₹5 crossing</span></li>
+      </ul>
+    </div>
+    <div class="prac-card">
+      <span class="prac-icon">💡</span>
+      <div class="prac-title">Local Tips</div>
+      <ul class="prac-list">
+        <li>Language spoken<span class="prac-val">Tulu, Kannada</span></li>
+        <li>Currency<span class="prac-val">Indian Rupee</span></li>
+        <li>UPI payments<span class="prac-val">Widely accepted</span></li>
+        <li>Emergency<span class="prac-val">112</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div class="newsletter">
+  <h2>Stay Close to Mangalore</h2>
+  <p>Get seasonal guides, festival alerts and hidden gem recommendations — directly in your inbox.</p>
+  <div class="nl-form">
+    <input type="email" placeholder="Your email address">
+    <button>Subscribe</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="nav-logo">Mangalore<span>Awaits</span></span>
+      <p class="footer-tagline">Your trusted guide to the Coastal Pearl of Karnataka — curated by locals, designed for travellers who seek the real thing.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#">Top Attractions</a></li>
+        <li><a href="#">Beaches</a></li>
+        <li><a href="#">Temples & Heritage</a></li>
+        <li><a href="#">Day Trips</a></li>
+        <li><a href="#">Nearby Destinations</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#">Hotels & Stays</a></li>
+        <li><a href="#">Guided Tours</a></li>
+        <li><a href="#">Airport Transfers</a></li>
+        <li><a href="#">Food Tours</a></li>
+        <li><a href="#">Water Sports</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Plan</h4>
+      <ul>
+        <li><a href="#">Itineraries</a></li>
+        <li><a href="#">Best Time to Visit</a></li>
+        <li><a href="#">Getting Here</a></li>
+        <li><a href="#">Travel Tips</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 MangaloreAwaits. Made with ♥ in Mangalore.</div>
+    <div class="footer-social">
+      <a href="#" class="social-btn">f</a>
+      <a href="#" class="social-btn">in</a>
+      <a href="#" class="social-btn">yt</a>
+      <a href="#" class="social-btn">ig</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.itin-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.itin-tab').forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.place-card, .service-card, .food-card, .prac-card, .exp-mini').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
